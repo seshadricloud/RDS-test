@@ -1,12 +1,5 @@
 variable "region" {}
-
-variable "cidr_block" {
-description = ""
-type = string
-default = ""
-}
-
-
+variable "cidr_block" {}
 variable "envname" {}
 variable "pubsubnets" {}
 variable "privsubnets" {}
