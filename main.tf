@@ -39,19 +39,19 @@ resource "aws_subnet" "privsubnets" {
   }
 }
 
-#datasubnet
+# #datasubnet
 
-resource "aws_subnet" "datasubnets" {
-  count = length(var.azs)
-  vpc_id     = aws_vpc.test.id
-  cidr_block = element(var.datasubnets,count.index)
-  availability_zone = element(var.azs,count.index)
+# resource "aws_subnet" "datasubnets" {
+#   count = length(var.azs)
+#   vpc_id     = aws_vpc.test.id
+#   cidr_block = element(var.datasubnets,count.index)
+#   availability_zone = element(var.azs,count.index)
 
 
-  tags = {
-    Name = "${var.envname}-datasubnet-${count.index+1}"
-  }
-}
+#   tags = {
+#     Name = "${var.envname}-datasubnet-${count.index+1}"
+#   }
+# }
 
 #Internet gateway
 
@@ -112,20 +112,20 @@ resource "aws_route_table" "privateroute" {
 
 }
 
-#data route
+# #data route
 
-resource "aws_route_table" "dataroute" {
-  vpc_id = aws_vpc.test.id
+# resource "aws_route_table" "dataroute" {
+#   vpc_id = aws_vpc.test.id
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.natgw.id
-  }
-  tags = {
-    Name = "${var.envname}-dataroute"
-  }
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     nat_gateway_id = aws_nat_gateway.natgw.id
+#   }
+#   tags = {
+#     Name = "${var.envname}-dataroute"
+#   }
 
-}
+# }
 
 #route table association
 
@@ -142,8 +142,8 @@ resource "aws_route_table_association" "privsub-association" {
   route_table_id = aws_route_table.privateroute.id
 }
 
-resource "aws_route_table_association" "datasub-association" {
-  count = length(var.datasubnets)
-  subnet_id      = element(aws_subnet.datasubnets.*.id,count.index)
-  route_table_id = aws_route_table.dataroute.id
-}
+# resource "aws_route_table_association" "datasub-association" {
+#   count = length(var.datasubnets)
+#   subnet_id      = element(aws_subnet.datasubnets.*.id,count.index)
+#   route_table_id = aws_route_table.dataroute.id
+# }

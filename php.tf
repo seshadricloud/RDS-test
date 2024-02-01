@@ -1,11 +1,10 @@
 #php.tf
 
-
 #security groups
 resource "aws_security_group" "phpsg" {
   name        = "php1"
   description = "Allow ssh inbound traffic"
-  vpc_id      = aws_vpc.test
+  vpc_id      = aws_vpc.test.id
 
   ingress {
     description      = "ssh from VPC"
@@ -13,7 +12,6 @@ resource "aws_security_group" "phpsg" {
     to_port          = 22
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-
   }
 
   ingress {
@@ -45,11 +43,12 @@ resource "aws_security_group" "phpsg" {
 # }
 
 
+
 #instace
 resource "aws_instance" "php" {
   ami           = var.ami
   instance_type = var.type
-  key_name = aws_key_pair.seshadritest1.id
+  key_name = aws_key_pair.test1.id
   vpc_security_group_ids = ["${aws_security_group.phpsg.id}"]
   subnet_id = "${aws_subnet.pubsubnets[0].id}"
   user_data = data.template_file.userdata1.rendered
@@ -63,5 +62,5 @@ resource "aws_instance" "php" {
 #userdata
 data "template_file" "userdata1" {
   template = "${file("php.sh")}"
-
 }
+

@@ -40,7 +40,7 @@ resource "aws_security_group" "rds" {
 
 resource "aws_db_subnet_group" "db-subnetgroup" {
   name       = "db-subnetgroup"
-  subnet_ids = [ aws_subnet.datasubnets[1].id, aws_subnet.datasubnets[2].id]
+  subnet_ids = [ aws_subnet.pubsubnets[1].id, aws_subnet.pubsubnets[2].id]
 
   tags = {
     Name = "${var.envname}-rdssubnet-group"

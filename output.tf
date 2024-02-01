@@ -10,7 +10,7 @@ output "phpsgsg" {
        value = aws_security_group.phpsg.id
 }
 
-output "seshadritest1" {
-       value = aws_key_pair.seshadritest1.id
+output "test1" {
+       value = aws_key_pair.test1.id
 }
 
