@@ -1,12 +1,5 @@
 variable "region" {}
-
-variable "cidr_block" {
-description = ""
-type = string
-default = ""
-}
-
-
+variable "cidr" {}
 variable "envname" {}
 variable "pubsubnets" {}
 variable "privsubnets" {}
@@ -16,9 +9,3 @@ variable "ami" {}
 variable "type" {}
 
 
-
-# variable "cidr_blocks" {
-# description = ""
-# type = list(string)
-# default = []
-# }

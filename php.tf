@@ -52,7 +52,7 @@ resource "aws_instance" "php" {
   key_name = aws_key_pair.seshadritest1.id
   vpc_security_group_ids = ["${aws_security_group.phpsg.id}"]
   subnet_id = "${aws_subnet.pubsubnets[0].id}"
-  # user_data = data.template_file.userdata1.rendered
+  user_data = data.template_file.userdata1.rendered
 
   tags = {
     Name = "${var.envname}-tera-dev"
@@ -60,8 +60,8 @@ resource "aws_instance" "php" {
 }
 
 
-# #userdata
-# data "template_file" "userdata1" {
-#   template = "${file("php.sh")}"
+#userdata
+data "template_file" "userdata1" {
+  template = "${file("php.sh")}"
 
-# }
+}
